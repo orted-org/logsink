@@ -7,18 +7,18 @@ import (
 
 type BatchService struct {
 	maxDuration time.Duration
-	emitIfFull  func(items []interface{})
+	ifFlush     func(items []interface{})
 	mu          sync.RWMutex
 	closeChan   chan struct{}
 	lastFlush   time.Time
 	repo        *BatchRepo
 }
 
-func New(maxSize int, duration time.Duration, emitIfFull func(items []interface{})) *BatchService {
+func New(maxSize int, duration time.Duration, ifFlush func(items []interface{})) *BatchService {
 
 	b := &BatchService{
 		maxDuration: duration,
-		emitIfFull:  emitIfFull,
+		ifFlush:     ifFlush,
 		lastFlush:   time.Now(),
 		repo:        NewBatchRepo(maxSize),
 	}
@@ -73,16 +73,17 @@ func (b *BatchService) FlushOut() {
 		return
 	}
 	items := make([]interface{}, temp.Size())
+	batchItems := temp.Items()
 	for i := 0; i < temp.Size(); i++ {
-		if temp.items[i] != nil {
-			items[i] = temp.items[i]
+		if batchItems[i] != nil {
+			items[i] = batchItems[i]
 		} else {
 			break
 		}
 	}
 
 	// emiting items
-	go b.emitIfFull(items)
+	go b.ifFlush(items)
 
 	// setting the flush time to current time
 	b.lastFlush = time.Now()

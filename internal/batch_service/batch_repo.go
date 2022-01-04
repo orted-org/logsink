@@ -21,6 +21,10 @@ func (b *BatchRepo) Push(item interface{}) {
 	}
 }
 
+func (b *BatchRepo) Items() []interface{} {
+	return b.items
+}
+
 func (b *BatchRepo) Size() int {
 	return b.index + 1
 }

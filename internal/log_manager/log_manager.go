@@ -16,18 +16,18 @@ type LogManager struct {
 	// for batch
 	batchSize   int
 	maxDuration time.Duration
-	ifFull      func(data []interface{}, service, logType string)
+	ifFlush      func(data []interface{}, service, logType string)
 
 	dataChan  chan LogObject
 	closeChan chan struct{}
 	services  map[string][3]*batchservice.BatchService
 }
 
-func New(batchSize int, maxDuration time.Duration, ifFull func(data []interface{}, service, logType string)) *LogManager {
+func New(batchSize int, maxDuration time.Duration, ifFlush func(data []interface{}, service, logType string)) *LogManager {
 	m := &LogManager{
 		batchSize:   batchSize,
 		maxDuration: maxDuration,
-		ifFull:      ifFull,
+		ifFlush:      ifFlush,
 
 		dataChan:  make(chan LogObject, 100),
 		closeChan: make(chan struct{}),
@@ -96,13 +96,13 @@ func (l *LogManager) RegisterService(name string) {
 		// creating three batches for Application, HTTP and Other Logs
 		l.services[name] = [3]*batchservice.BatchService{
 			batchservice.New(l.batchSize, l.maxDuration, func(items []interface{}) {
-				l.ifFull(items, name, APPLICATION_LOG_TYPE)
+				l.ifFlush(items, name, APPLICATION_LOG_TYPE)
 			}),
 			batchservice.New(l.batchSize, l.maxDuration, func(items []interface{}) {
-				l.ifFull(items, name, HTTP_LOG_TYPE)
+				l.ifFlush(items, name, HTTP_LOG_TYPE)
 			}),
 			batchservice.New(l.batchSize, l.maxDuration, func(items []interface{}) {
-				l.ifFull(items, name, OTHER_LOG_TYPE)
+				l.ifFlush(items, name, OTHER_LOG_TYPE)
 			}),
 		}
 	}
