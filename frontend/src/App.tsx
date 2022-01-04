@@ -1,10 +1,9 @@
-import React from "react";
-import Button from "./Components/Button";
+import LoginIndex from "./Pages/Login/Index";
 
 function App() {
   return (
     <div>
-      <Button>Hello React</Button>
+      <LoginIndex />
     </div>
   );
 }
