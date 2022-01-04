@@ -81,7 +81,7 @@ func initServer(app *App) {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "4000"
+		port = "8888"
 	}
 
 	srv := http.Server{
