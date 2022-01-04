@@ -129,6 +129,8 @@ func initLogManager(app *App) {
 		if len(data) == 0 {
 			return
 		}
+
+		// appending srv_ to service name for distinguishing
 		err := app.store.AddManyLogs(context.Background(), data, "srv_"+service, logType)
 		if err != nil {
 			app.logger.Println("could not put logs to db", err)

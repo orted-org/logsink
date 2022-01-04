@@ -70,25 +70,6 @@ func main() {
 	// init any extra auxillary services
 	initAuxillary()
 
-	// go func() {
-	// 	m := logmanager.New(100, time.Second*3, func(data []interface{}, service, logType string) {
-	// 		if len(data) == 0 {
-	// 			return
-	// 		}
-	// 		err := app.store.AddManyLogs(context.Background(), data, "srv_"+service, logType)
-	// 		if err != nil {
-	// 			fmt.Println("ERROR WHILE SINKING", err)
-	// 		}
-	// 	})
-	// 	billion := 100000
-	// 	ts := time.Now()
-	// 	for i := 0; i < billion; i++ {
-	// 		srv, log := util.RandomLogs()
-	// 		m.PutLog(log, srv)
-	// 	}
-	// 	fmt.Println("Completed In", time.Since(ts).Seconds())
-	// }()
-
 	initLogManager(app)
 
 	// server
