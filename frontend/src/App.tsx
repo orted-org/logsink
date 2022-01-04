@@ -1,9 +1,9 @@
-import LoginIndex from "./Pages/Login/Index";
+import DashboardIndex from "./Pages/Dashboard/Index";
 
 function App() {
   return (
     <div>
-      <LoginIndex />
+      <DashboardIndex />
     </div>
   );
 }
