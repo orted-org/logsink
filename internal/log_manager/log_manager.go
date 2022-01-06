@@ -16,7 +16,7 @@ type LogManager struct {
 	// for batch
 	batchSize   int
 	maxDuration time.Duration
-	ifFlush      func(data []interface{}, service, logType string)
+	ifFlush     func(data []interface{}, service, logType string)
 
 	dataChan  chan LogObject
 	closeChan chan struct{}
@@ -27,56 +27,57 @@ func New(batchSize int, maxDuration time.Duration, ifFlush func(data []interface
 	m := &LogManager{
 		batchSize:   batchSize,
 		maxDuration: maxDuration,
-		ifFlush:      ifFlush,
+		ifFlush:     ifFlush,
 
 		dataChan:  make(chan LogObject, 100),
 		closeChan: make(chan struct{}),
 		services:  make(map[string][3]*batchservice.BatchService),
 	}
 
-	go m.LogListener()
+	go m.LogChannelListener()
 	return m
 }
 
 func (l *LogManager) PutLog(data map[string]interface{}, service string) {
-	finalTs := time.Now()
-	if tss, ok := (data["timestamp"]).(string); ok {
-		if ts, err := time.Parse(time.RFC3339, tss); err == nil {
-			finalTs = ts
-		}
-	}
-	data["timestamp"] = finalTs
 
 	log := LogObject{
 		Service: service,
 		Type:    OTHER_LOG_TYPE,
 		Data:    data,
 	}
+
+	l.PreProcessLog(&log)
+
 	l.dataChan <- log
 }
 
-func (l *LogManager) LogListener() {
-	for {
-		select {
-		case data := <-l.dataChan:
-			l.BatchLog(&data)
-		case <-l.closeChan:
-			return
+func (l *LogManager) PreProcessLog(log *LogObject) {
+	// append timestamp (in correct format)
+	finalTs := time.Now()
+	if tss, ok := (log.Data["timestamp"]).(string); ok {
+		if ts, err := time.Parse(time.RFC3339, tss); err == nil {
+			finalTs = ts
 		}
+	}
+	log.Data["timestamp"] = finalTs
+
+	// checking the log type
+	if _, ok := log.Data["level"]; ok {
+		log.Type = APPLICATION_LOG_TYPE
+	} else if _, ok := log.Data["method"]; ok {
+		log.Type = HTTP_LOG_TYPE
 	}
 }
 
 func (l *LogManager) BatchLog(data *LogObject) {
 	index := 0
 
-	// checking the log type
-	if _, ok := data.Data["level"]; ok {
-		data.Type = APPLICATION_LOG_TYPE
-	} else if _, ok := data.Data["method"]; ok {
-		data.Type = HTTP_LOG_TYPE
+	switch data.Type {
+	case APPLICATION_LOG_TYPE:
+		index = 0
+	case HTTP_LOG_TYPE:
 		index = 1
-	} else {
-		data.Type = OTHER_LOG_TYPE
+	default:
 		index = 2
 	}
 
@@ -118,6 +119,17 @@ func (l *LogManager) UnregisterService(name string) {
 	}
 	// deleting service from map
 	delete(l.services, name)
+}
+
+func (l *LogManager) LogChannelListener() {
+	for {
+		select {
+		case data := <-l.dataChan:
+			l.BatchLog(&data)
+		case <-l.closeChan:
+			return
+		}
+	}
 }
 
 func (l *LogManager) Close() {
