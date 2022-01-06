@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentSize } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentSize } from "./Global/Type";
 const SBadge = styled.div`
   box-sizing: border-box;
   width: fit-content;

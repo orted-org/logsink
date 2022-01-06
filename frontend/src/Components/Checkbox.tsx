@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentSize, ComponentIntent } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentSize, ComponentIntent } from "./Global/Type";
 import { IconCheck } from "./Icons";
 const SCheckbox = styled.div`
   box-sizing: border-box;

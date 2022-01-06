@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentSize, ComponentIntent } from "../Global/Type";
+import { ComponentSize, ComponentIntent } from "./Global/Type";
 import Radio from "./Radio";
 
 interface RadioGroupProps {

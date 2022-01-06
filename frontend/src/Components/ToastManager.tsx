@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { SimaraToastManagerContext } from "../Global/Context";
-import { ISimaraToast } from "../Global/Interface";
+import { SimaraToastManagerContext } from "./Global/Context";
+import { ISimaraToast } from "./Global/Interface";
 import Toast from "./Toast";
 let globalCounter = 0;
 const STM = styled.section`

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../Components/Button";
-import { FullScreen } from "../../Global/Styles";
+import { FullScreen } from "../../Components/Global/Styles";
 
 function DashboardIndex() {
   return (

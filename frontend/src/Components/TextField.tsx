@@ -1,8 +1,8 @@
 import { InputHTMLAttributes, useMemo, useState } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentSize } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentSize } from "./Global/Type";
 import IconWrapper from "./IconWrapper";
 
 const STextFieldBox = styled.div`

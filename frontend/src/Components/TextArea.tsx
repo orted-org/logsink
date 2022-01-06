@@ -1,7 +1,7 @@
 import { TextareaHTMLAttributes, useState, useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
 
 const STextAreaBox = styled.div`
   box-sizing: border-box;

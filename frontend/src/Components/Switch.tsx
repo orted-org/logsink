@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentIntent, ComponentSize } from "../Global/Type";
-import { getNearestEven } from "../Utils/Size";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentIntent, ComponentSize } from "./Global/Type";
+import { getNearestEven } from "./Utils/Size";
 const SSwitchTrack = styled.div`
   box-sizing: border-box;
   background: ${(p) => p.theme.trackColor};

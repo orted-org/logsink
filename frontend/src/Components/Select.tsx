@@ -1,8 +1,8 @@
 import React, { SelectHTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentSize } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentSize } from "./Global/Type";
 const SSelect = styled.select`
   box-sizing: border-box;
   height: ${(p) => p.theme.height + "px"};

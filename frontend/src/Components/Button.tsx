@@ -1,8 +1,8 @@
 import React, { ButtonHTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentIntent, ComponentSize } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentIntent, ComponentSize } from "./Global/Type";
 import IconWrapper from "./IconWrapper";
 import Spinner from "./Spinner";
 const SButton = styled.button`

@@ -1,6 +1,6 @@
 import Button from "../../Components/Button";
 import TextField from "../../Components/TextField";
-import { FullScreen } from "../../Global/Styles";
+import { FullScreen } from "../../Components/Global/Styles";
 
 function LoginIndex() {
   return (

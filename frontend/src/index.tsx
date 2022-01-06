@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import ToastManager from "./Components/ToastManager";
-import { SimaraThemeContext } from "./Global/Context";
-import { SimaraLightTheme } from "./Global/ThemeData";
+import { SimaraThemeContext } from "./Components/Global/Context";
+import { SimaraLightTheme } from "./Components/Global/ThemeData";
 
 ReactDOM.render(
   <React.StrictMode>

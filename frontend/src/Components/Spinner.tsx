@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { ComponentSize } from "../Global/Type";
+import { ComponentSize } from "./Global/Type";
 const SSpinner = styled.div`
   display: flex;
   justify-content: center;

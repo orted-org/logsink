@@ -1,9 +1,11 @@
-import DashboardIndex from "./Pages/Dashboard/Index";
+import TopBar from "./Organs/TopBar";
+import ServiceIndex from "./Pages/Service/ServiceList/Index";
 
 function App() {
   return (
     <div>
-      <DashboardIndex />
+      <TopBar />
+      <ServiceIndex />
     </div>
   );
 }

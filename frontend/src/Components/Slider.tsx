@@ -1,8 +1,8 @@
 import { InputHTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { useSimara } from "../Global/Context";
-import { ISimaraThemeData } from "../Global/Interface";
-import { ComponentIntent, ComponentSize } from "../Global/Type";
+import { useSimara } from "./Global/Context";
+import { ISimaraThemeData } from "./Global/Interface";
+import { ComponentIntent, ComponentSize } from "./Global/Type";
 
 const SSlider = styled.input`
   -webkit-appearance: none;

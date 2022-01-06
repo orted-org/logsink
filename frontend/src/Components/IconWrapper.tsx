@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ComponentSize } from "../Global/Type";
+import { ComponentSize } from "./Global/Type";
 const SIconWrapper = styled.div`
   transition: all 0.3s;
   height: fit-content;
