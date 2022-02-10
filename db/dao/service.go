@@ -16,7 +16,7 @@ type AddServiceParams struct {
 }
 
 func (m *MongoDB) AddService(ctx context.Context, arg AddServiceParams) (string, error) {
-	coll := m.client.Database("internal").Collection("service")
+	coll := m.client.Database("logsink").Collection("service")
 
 	arg.CreatedAt = time.Now().UTC()
 	res, err := coll.InsertOne(ctx, arg)
@@ -27,7 +27,7 @@ func (m *MongoDB) AddService(ctx context.Context, arg AddServiceParams) (string,
 }
 
 func (m *MongoDB) GetServiceByID(ctx context.Context, ID string) (Service, error) {
-	coll := m.client.Database("internal").Collection("service")
+	coll := m.client.Database("logsink").Collection("service")
 	_id, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
 		return Service{}, err
@@ -42,7 +42,7 @@ func (m *MongoDB) GetServiceByID(ctx context.Context, ID string) (Service, error
 }
 
 func (m *MongoDB) DeleteServiceByID(ctx context.Context, id string) error {
-	coll := m.client.Database("internal").Collection("service")
+	coll := m.client.Database("logsink").Collection("service")
 	_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return err
@@ -60,7 +60,7 @@ type UpdateServiceByIDParams struct {
 }
 
 func (m *MongoDB) UpdateServiceByID(ctx context.Context, id string, arg UpdateServiceByIDParams) (int64, error) {
-	coll := m.client.Database("internal").Collection("service")
+	coll := m.client.Database("logsink").Collection("service")
 	_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return 0, err
@@ -75,7 +75,7 @@ func (m *MongoDB) UpdateServiceByID(ctx context.Context, id string, arg UpdateSe
 }
 
 func (m *MongoDB) GetServices(ctx context.Context) ([]Service, error) {
-	coll := m.client.Database("internal").Collection("service")
+	coll := m.client.Database("logsink").Collection("service")
 	c, err := coll.Find(ctx, bson.D{})
 
 	if err != nil {
