@@ -15,7 +15,7 @@ export class RService implements IRService {
   }
   async createService(service: MService) {
     try {
-      const res = await Request.Post(`${this.baseUrl}`);
+      const res = await Request.Post(`${this.baseUrl}/service`);
       if (res.status !== 201) {
         throw new Error("something went wrong");
       }
@@ -26,7 +26,7 @@ export class RService implements IRService {
   async getServiceList() {
     let serviceList: MService[] = [];
     try {
-      const res = await Request.Get(`${this.baseUrl}`);
+      const res = await Request.Get(`${this.baseUrl}/service`);
       if (res.status !== 200) {
         throw new Error("something went wrong");
       }
@@ -50,7 +50,10 @@ export class RService implements IRService {
       description: service.description,
     };
     try {
-      const res = await Request.Put(`${this.baseUrl}/${service.id}`, jsonData);
+      const res = await Request.Put(
+        `${this.baseUrl}/service/${service.id}`,
+        jsonData
+      );
       if (res.status !== 200) {
         throw new Error("something went wrong");
       }
@@ -60,7 +63,7 @@ export class RService implements IRService {
   }
   async deleteService(id: string) {
     try {
-      const res = await Request.Delete(`${this.baseUrl}/${id}`);
+      const res = await Request.Delete(`${this.baseUrl}/service/${id}`);
       if (res.status !== 200) {
         throw new Error("something went wrong");
       }
