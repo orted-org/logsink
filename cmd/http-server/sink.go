@@ -59,7 +59,11 @@ func ReadAndReact(app *App, ws *websocket.Conn, serviceName string) {
 			return
 		} else {
 			var log map[string]interface{}
+
+			// un-marshalling the log into map of interfaces
 			json.Unmarshal(p, &log)
+
+			// putting into log manager
 			app.logManager.PutLog(log, serviceName)
 		}
 	}

@@ -108,7 +108,13 @@ func initAuthService(app *App) {
 }
 
 func initLogManager(app *App) {
+
+	// getting the config for log manager
+
+	// max batch size before writing to store (db)
 	batchSizeStr := os.Getenv("BATCH_SIZE")
+
+	// max duration to wait before writing to store
 	maxDur := os.Getenv("MAX_DURATION")
 
 	bs := 100
@@ -130,7 +136,7 @@ func initLogManager(app *App) {
 			return
 		}
 
-		// appending srv_ to service name for distinguishing
+		// appending srv_ to service name for distinguishing services from other collections
 		err := app.store.AddManyLogs(context.Background(), data, "srv_"+service, logType)
 		if err != nil {
 			app.logger.Println("could not put logs to db", err)
