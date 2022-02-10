@@ -36,7 +36,9 @@ func (app *App) handleGetService(rw http.ResponseWriter, r *http.Request) {
 			sendErrorResponse(rw, http.StatusInternalServerError, nil, err.Error())
 			return
 		}
-
+		if services == nil {
+			services = make([]db.Service, 0)
+		}
 		sendResponse(rw, http.StatusCreated, services, "")
 		return
 	}
