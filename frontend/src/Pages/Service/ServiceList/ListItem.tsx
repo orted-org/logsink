@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SimaraLightTheme } from "../../../Components/Global/ThemeData";
-import { IService } from "../../../TI/Interfaces";
+import MService from "../../../Logic/Model/MService";
 
 const SServiceListItem = styled.tr`
   height: 40px;
@@ -15,7 +15,7 @@ const SServiceListItem = styled.tr`
   }
 `;
 interface ServiceListItemProps {
-  service: IService;
+  service: MService;
   actions?: React.ReactNode[];
 }
 function ServiceListItem(props: ServiceListItemProps) {
@@ -28,7 +28,7 @@ function ServiceListItem(props: ServiceListItemProps) {
       <td style={{ color: SimaraLightTheme.Colors.text.dil60 }}>
         {props.service.description}
       </td>
-      <td>{props.service.created_at.toLocaleString()}</td>
+      <td>{props.service.createdAt.toLocaleString()}</td>
       {props.actions && (
         <td>
           {props.actions.map((item, index) => {
