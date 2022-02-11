@@ -24,4 +24,25 @@ export class SService {
       });
     }
   };
+
+  @action
+  deleteService = async (id: string) => {
+    this.status = "Deleting services";
+    try {
+      await this.serviceRepo.deleteService(id);
+      runInAction(() => {
+        const temp: MService[] = [];
+        this.serviceList.forEach((item) => {
+          item.id !== id && temp.push(item);
+        });
+        // assigning the new list to the store
+        this.serviceList = temp;
+        this.status = `Deleted service with id = ${id}`;
+      });
+    } catch (err: any) {
+      runInAction(() => {
+        this.status = err.message || "Failed to fetch services";
+      });
+    }
+  };
 }

@@ -66,7 +66,13 @@ function ServiceListIndex() {
                           appearance="minimal"
                           isIconButton
                           iconAfter={IconTrash}
-                          onClick={() => {}}
+                          onClick={() => {
+                            const confirm = window.prompt(
+                              `Are you confirm to delete the service? Please type ${item.name} to delete`
+                            );
+                            if (confirm && confirm === item.name)
+                              serviceStore.deleteService(item.id);
+                          }}
                         />,
                       ]}
                     />
