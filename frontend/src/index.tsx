@@ -7,12 +7,15 @@ import { SimaraLightTheme } from "./Components/Global/ThemeData";
 import { StoresContext } from "./Logic/Providers/StoresProviders";
 import { SService } from "./Logic/Stores/SService";
 import { RService } from "./Logic/Repository/RService";
+import { SAuth } from "./Logic/Stores/SAuth";
+import { RAuth } from "./Logic/Repository/RAuth";
 
 ReactDOM.render(
   <React.StrictMode>
     <StoresContext.Provider
       value={{
         serviceStore: new SService(new RService("http://localhost:4000")),
+        authStore: new SAuth(new RAuth("http://localhost:4000")),
       }}
     >
       <SimaraThemeContext.Provider
