@@ -9,6 +9,7 @@ export class Request {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: method === "GET" ? null : JSON.stringify(data),
     });
     return response;
