@@ -16,7 +16,7 @@ export class SService {
       const serviceList = await this.serviceRepo.getServiceList();
       runInAction(() => {
         this.serviceList = serviceList;
-        this.status = null;
+        this.status = `Fetched ${serviceList.length} items.`;
       });
     } catch (err: any) {
       runInAction(() => {

@@ -27,10 +27,10 @@ export class RService implements IRService {
     let serviceList: MService[] = [];
     try {
       const res = await Request.Get(`${this.baseUrl}/service`);
-      if (res.status !== 200) {
-        throw new Error("something went wrong");
-      }
       const jsonData = await res.json();
+      if (res.status !== 200) {
+        throw new Error(jsonData.message);
+      }
       serviceList = jsonData.data.map((item: any): MService => {
         return {
           id: item.id,
