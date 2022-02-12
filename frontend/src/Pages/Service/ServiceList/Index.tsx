@@ -1,13 +1,13 @@
+import { ActionIcon, Badge } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import Badge from "../../../Components/Badge";
-import Button from "../../../Components/Button";
 import { FullScreen } from "../../../Components/Global/Styles";
 import {
   IconPencil,
   IconStatusOnline,
   IconTrash,
 } from "../../../Components/Icons";
+import IconWrapper from "../../../Components/IconWrapper";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import ServiceListItem from "./ListItem";
 
@@ -23,7 +23,6 @@ function ServiceListIndex() {
         const { serviceList, status } = serviceStore;
         return (
           <FullScreen style={{ marginTop: "10px", height: "fit-content" }}>
-            <Badge intent={"grey"}>Status</Badge>
             <Badge style={{ marginLeft: "10px" }}>{status}</Badge>
             <table
               style={{
@@ -46,26 +45,24 @@ function ServiceListIndex() {
                       key={item.id}
                       service={item}
                       actions={[
-                        <Button
+                        <ActionIcon
+                          style={{ display: "inline", marginRight: "5px" }}
                           key={item.id + "edit"}
-                          intent="normal"
-                          appearance="minimal"
-                          isIconButton
-                          iconAfter={IconPencil}
-                        />,
-                        <Button
-                          key={item.id + "online_data"}
-                          intent="normal"
-                          appearance="minimal"
-                          isIconButton
-                          iconAfter={IconStatusOnline}
-                        />,
-                        <Button
+                          variant="light"
+                        >
+                          <IconWrapper>{IconPencil}</IconWrapper>
+                        </ActionIcon>,
+                        <ActionIcon
+                          style={{ display: "inline", marginRight: "5px" }}
+                          key={item.id + "live"}
+                          variant="light"
+                        >
+                          <IconWrapper>{IconStatusOnline}</IconWrapper>
+                        </ActionIcon>,
+                        <ActionIcon
+                          style={{ display: "inline" }}
                           key={item.id + "delete"}
-                          intent="danger"
-                          appearance="minimal"
-                          isIconButton
-                          iconAfter={IconTrash}
+                          variant="light"
                           onClick={() => {
                             const confirm = window.prompt(
                               `Are you confirm to delete the service? Please type ${item.name} to delete`
@@ -73,7 +70,9 @@ function ServiceListIndex() {
                             if (confirm && confirm === item.name)
                               serviceStore.deleteService(item.id);
                           }}
-                        />,
+                        >
+                          <IconWrapper>{IconTrash}</IconWrapper>
+                        </ActionIcon>,
                       ]}
                     />
                   );
