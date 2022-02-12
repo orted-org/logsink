@@ -15,7 +15,7 @@ export class RService implements IRService {
   }
   async createService(service: MService) {
     try {
-      const res = await Request.Post(`${this.baseUrl}/service`);
+      const res = await Request.Post(`${this.baseUrl}/service`, service);
       if (res.status !== 201) {
         throw new Error("something went wrong");
       }

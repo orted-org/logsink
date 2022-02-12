@@ -5,7 +5,9 @@ import { RService } from "../Repository/RService";
 export class SService {
   @observable serviceList: MService[] = [];
   @observable status: string | null = null;
+  @observable draftItem: MService | null;
   constructor(private serviceRepo: RService) {
+    this.draftItem = null;
     makeAutoObservable(this);
   }
 
@@ -21,6 +23,38 @@ export class SService {
     } catch (err: any) {
       runInAction(() => {
         this.status = err.message || "Failed to fetch services";
+      });
+    }
+  };
+
+  @action
+  createService = async (service: MService) => {
+    this.status = "Creating service.";
+    try {
+      await this.serviceRepo.createService(service);
+      runInAction(() => {
+        this.fetchServiceList();
+        this.status = `Service created.`;
+      });
+    } catch (err: any) {
+      runInAction(() => {
+        this.status = err.message || "Failed to create service.";
+      });
+    }
+  };
+
+  @action
+  updateService = async (service: MService) => {
+    this.status = "Updating service.";
+    try {
+      await this.serviceRepo.updateService(service);
+      runInAction(() => {
+        this.fetchServiceList();
+        this.status = `Service updated.`;
+      });
+    } catch (err: any) {
+      runInAction(() => {
+        this.status = err.message || "Failed to update service.";
       });
     }
   };
