@@ -31,7 +31,7 @@ function getIWTheme(p: IconWrapperProps): any {
       size = 20;
       break;
   }
-  let color = p.color || "#2c63ff";
+  let color = p.color || "white";
   return { size, color };
 }
 function IconWrapper(props: IconWrapperProps) {
