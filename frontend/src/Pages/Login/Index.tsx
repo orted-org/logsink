@@ -1,10 +1,9 @@
-import Button from "../../Components/Button";
-import TextField from "../../Components/TextField";
 import { FullScreen } from "../../Components/Global/Styles";
 import { useEffect, useState } from "react";
 import { MAuthCredentials } from "../../Logic/Model/MAuth";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { Observer } from "mobx-react-lite";
+import { Button, TextInput, Badge } from "@mantine/core";
 
 function LoginIndex() {
   const [cred, setCred] = useState<MAuthCredentials>({
@@ -36,7 +35,7 @@ function LoginIndex() {
                 flexDirection: "column",
               }}
             >
-              <TextField
+              <TextInput
                 value={cred.username}
                 onChange={(e) => {
                   setCred((ps) => {
@@ -45,9 +44,9 @@ function LoginIndex() {
                 }}
                 required
                 placeholder="Username"
-                containerStyle={{ width: "250px" }}
+                style={{ width: "250px" }}
               />
-              <TextField
+              <TextInput
                 value={cred.password}
                 onChange={(e) => {
                   setCred((ps) => {
@@ -57,18 +56,18 @@ function LoginIndex() {
                 required
                 placeholder="Password"
                 type="password"
-                containerStyle={{ margin: "10px 0", width: "250px" }}
+                style={{ margin: "10px 0", width: "250px" }}
               />
               <Button
                 style={{ width: "250px" }}
-                onClick={(e) => {
+                onClick={(e: any) => {
                   e.preventDefault();
                   authStore.login(cred);
                 }}
               >
                 Login
               </Button>
-              <p>{status}</p>
+              <Badge style={{ marginTop: "10px" }}>{status}</Badge>
             </form>
           </FullScreen>
         );
