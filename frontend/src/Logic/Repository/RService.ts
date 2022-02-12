@@ -36,7 +36,7 @@ export class RService implements IRService {
           id: item.id,
           name: item.name,
           description: item.description,
-          createdAt: item.created_at,
+          createdAt: new Date(item.created_at),
         };
       });
     } catch (err) {
