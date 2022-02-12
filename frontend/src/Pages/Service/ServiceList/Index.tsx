@@ -49,6 +49,9 @@ function ServiceListIndex() {
                           style={{ display: "inline", marginRight: "5px" }}
                           key={item.id + "edit"}
                           variant="light"
+                          onClick={() => {
+                            serviceStore.draftItem = item;
+                          }}
                         >
                           <IconWrapper>{IconPencil}</IconWrapper>
                         </ActionIcon>,
@@ -56,6 +59,7 @@ function ServiceListIndex() {
                           style={{ display: "inline", marginRight: "5px" }}
                           key={item.id + "live"}
                           variant="light"
+                          onClick={() => {}}
                         >
                           <IconWrapper>{IconStatusOnline}</IconWrapper>
                         </ActionIcon>,
@@ -64,10 +68,11 @@ function ServiceListIndex() {
                           key={item.id + "delete"}
                           variant="light"
                           onClick={() => {
+                            const name = item.name || "Remove";
                             const confirm = window.prompt(
-                              `Are you confirm to delete the service? Please type ${item.name} to delete`
+                              `Are you confirm to delete the service? Please type ${name} to continue deleting the service.`
                             );
-                            if (confirm && confirm === item.name)
+                            if (confirm && confirm === name)
                               serviceStore.deleteService(item.id);
                           }}
                         >

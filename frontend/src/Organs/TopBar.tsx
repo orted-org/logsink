@@ -1,5 +1,4 @@
-import { Button, Drawer, useMantineTheme } from "@mantine/core";
-import { useState } from "react";
+import { Button, useMantineTheme } from "@mantine/core";
 import styled from "styled-components";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
@@ -23,7 +22,14 @@ function TopBar() {
       <Button
         rightIcon={<IconWrapper>{IconPlus}</IconWrapper>}
         style={{ marginRight: "10px" }}
-        onClick={() => serviceStore.showServiceDrawer(true)}
+        onClick={() => {
+          serviceStore.draftItem = {
+            id: "",
+            name: "",
+            description: "",
+            createdAt: new Date(),
+          };
+        }}
       >
         New Service
       </Button>
