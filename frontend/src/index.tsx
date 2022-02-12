@@ -9,6 +9,7 @@ import { SService } from "./Logic/Stores/SService";
 import { RService } from "./Logic/Repository/RService";
 import { SAuth } from "./Logic/Stores/SAuth";
 import { RAuth } from "./Logic/Repository/RAuth";
+import { MantineProvider } from "@mantine/core";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +25,9 @@ ReactDOM.render(
         }}
       >
         <ToastManager latestFirst>
-          <App />
+          <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles>
+            <App />
+          </MantineProvider>
         </ToastManager>
       </SimaraThemeContext.Provider>
     </StoresContext.Provider>
