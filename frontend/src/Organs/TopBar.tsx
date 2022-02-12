@@ -1,8 +1,10 @@
-import { Button, useMantineTheme } from "@mantine/core";
+import { Button, Drawer, useMantineTheme } from "@mantine/core";
+import { useState } from "react";
 import styled from "styled-components";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
 import { useStores } from "../Logic/Providers/StoresProviders";
+import ServiceDrawer from "./ServiceDrawer";
 const STopBar = styled.div`
   height: fit-content;
   min-height: 60px;
@@ -15,11 +17,13 @@ const STopBar = styled.div`
 function TopBar() {
   const theme = useMantineTheme();
   const { authStore } = useStores();
+  const { serviceStore } = useStores();
   return (
     <STopBar theme={{ bg: theme.colors.gray[8] }}>
       <Button
         rightIcon={<IconWrapper>{IconPlus}</IconWrapper>}
         style={{ marginRight: "10px" }}
+        onClick={() => serviceStore.showServiceDrawer(true)}
       >
         New Service
       </Button>
@@ -32,6 +36,7 @@ function TopBar() {
       >
         Logout
       </Button>
+      <ServiceDrawer />
     </STopBar>
   );
 }
