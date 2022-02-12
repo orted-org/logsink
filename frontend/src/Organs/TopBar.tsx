@@ -1,22 +1,22 @@
-import { Button } from "@mantine/core";
+import { Button, useMantineTheme } from "@mantine/core";
 import styled from "styled-components";
-import { SimaraLightTheme } from "../Components/Global/ThemeData";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
 import { useStores } from "../Logic/Providers/StoresProviders";
 const STopBar = styled.div`
   height: fit-content;
   min-height: 60px;
-  border-bottom: 0.2px solid gray;
   display: flex;
+  background: ${(p) => p.theme.bg};
   padding: 0 10px;
   justify-content: flex-end;
   align-items: center;
 `;
 function TopBar() {
+  const theme = useMantineTheme();
   const { authStore } = useStores();
   return (
-    <STopBar>
+    <STopBar theme={{ bg: theme.colors.gray[8] }}>
       <Button
         rightIcon={<IconWrapper>{IconPlus}</IconWrapper>}
         style={{ marginRight: "10px" }}
