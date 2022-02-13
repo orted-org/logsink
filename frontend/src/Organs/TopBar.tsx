@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
 import { useStores } from "../Logic/Providers/StoresProviders";
+import ServiceCred from "./ServiceCred";
 import ServiceDrawer from "./ServiceDrawer";
 const STopBar = styled.div`
   height: fit-content;
@@ -43,6 +44,7 @@ function TopBar() {
         Logout
       </Button>
       <ServiceDrawer />
+      <ServiceCred />
     </STopBar>
   );
 }
