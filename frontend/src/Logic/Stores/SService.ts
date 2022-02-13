@@ -5,9 +5,9 @@ import { RService } from "../Repository/RService";
 export class SService {
   @observable serviceList: MService[] = [];
   @observable status: string | null = null;
-  @observable draftItem: MService | null;
+  @observable draftItem: MService | null = null;
+  @observable serviceCred: { id: string; secret: string } | null = null;
   constructor(private serviceRepo: RService) {
-    this.draftItem = null;
     makeAutoObservable(this);
   }
 
@@ -31,10 +31,11 @@ export class SService {
   createService = async (service: MService) => {
     this.status = "Creating service.";
     try {
-      await this.serviceRepo.createService(service);
+      const res = await this.serviceRepo.createService(service);
       runInAction(() => {
         this.fetchServiceList();
         this.status = `Service created.`;
+        this.serviceCred = res;
       });
     } catch (err: any) {
       runInAction(() => {

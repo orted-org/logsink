@@ -2,7 +2,7 @@ import MService from "../Model/MService";
 import { Request } from "../Util/Fetch";
 
 export interface IRService {
-  createService: (service: MService) => Promise<void>;
+  createService: (service: MService) => Promise<{ id: string; secret: string }>;
   getServiceList: () => Promise<MService[]>;
   updateService: (service: MService) => Promise<void>;
   deleteService: (id: string) => Promise<void>;
@@ -16,9 +16,11 @@ export class RService implements IRService {
   async createService(service: MService) {
     try {
       const res = await Request.Post(`${this.baseUrl}/service`, service);
+      const jsonData = await res.json();
       if (res.status !== 201) {
-        throw new Error("something went wrong");
+        throw new Error(jsonData.message || "something went wrong");
       }
+      return { id: jsonData.data.id, secret: jsonData.data.secret };
     } catch (err) {
       throw err;
     }
