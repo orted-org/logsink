@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 import { ComponentSize } from "./Global/Type";
 const SIconWrapper = styled.div`
@@ -15,7 +15,7 @@ const SIconWrapper = styled.div`
   }
 `;
 
-interface IconWrapperProps {
+interface IconWrapperProps extends ButtonHTMLAttributes<HTMLDivElement> {
   cSize?: ComponentSize;
   color?: string;
   children?: React.ReactNode;
@@ -36,7 +36,7 @@ function getIWTheme(p: IconWrapperProps): any {
 }
 function IconWrapper(props: IconWrapperProps) {
   return (
-    <SIconWrapper style={props.style} theme={getIWTheme(props)}>
+    <SIconWrapper {...props} style={props.style} theme={getIWTheme(props)}>
       {props.children}
     </SIconWrapper>
   );
