@@ -80,4 +80,15 @@ export class SService {
       });
     }
   };
+
+  @action
+  setDraftItem = (draft: MService | null) => {
+    this.draftItem = draft;
+  };
+
+  @action
+  setServiceCred = (sc: { id: string; secret: string } | null) => {
+    this.serviceCred = sc;
+  };
+
 }
