@@ -1,4 +1,5 @@
 import { Button, useMantineTheme } from "@mantine/core";
+import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
@@ -24,12 +25,12 @@ function TopBar() {
         rightIcon={<IconWrapper>{IconPlus}</IconWrapper>}
         style={{ marginRight: "10px" }}
         onClick={() => {
-          serviceStore.draftItem = {
+          serviceStore.setDraftItem({
             id: "",
             name: "",
             description: "",
             createdAt: new Date(),
-          };
+          });
         }}
       >
         New Service
@@ -43,7 +44,12 @@ function TopBar() {
       >
         Logout
       </Button>
-      <ServiceDrawer />
+      <Observer>
+        {() => {
+          const { draftItem } = serviceStore;
+          return draftItem && <ServiceDrawer item={draftItem} />;
+        }}
+      </Observer>
       <ServiceCred />
     </STopBar>
   );

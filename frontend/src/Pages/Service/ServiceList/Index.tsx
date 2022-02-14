@@ -50,7 +50,7 @@ function ServiceListIndex() {
                           key={item.id + "edit"}
                           variant="light"
                           onClick={() => {
-                            serviceStore.draftItem = item;
+                            serviceStore.setDraftItem(item);
                           }}
                         >
                           <IconWrapper>{IconPencil}</IconWrapper>
