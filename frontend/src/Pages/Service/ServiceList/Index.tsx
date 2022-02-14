@@ -68,9 +68,9 @@ function ServiceListIndex() {
                           key={item.id + "delete"}
                           variant="light"
                           onClick={() => {
-                            const name = item.name || "Remove";
+                            const name = "Delete";
                             const confirm = window.prompt(
-                              `Are you confirm to delete the service? Please type ${name} to continue deleting the service.`
+                              `Are you confirm to delete the service? Please type "${name}" to continue deleting the service.`
                             );
                             if (confirm && confirm === name)
                               serviceStore.deleteService(item.id);

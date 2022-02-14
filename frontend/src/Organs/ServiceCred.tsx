@@ -16,7 +16,7 @@ export default function ServiceCred() {
           <Modal
             opened={serviceCred != null}
             onClose={() => {
-              serviceStore.serviceCred = null;
+              serviceStore.setServiceCred(null);
             }}
             title="Service Credentials"
           >
@@ -25,7 +25,7 @@ export default function ServiceCred() {
               server.
             </p>
             <InputWrapper label="API ID" style={{ marginTop: "10px" }}>
-              <TextInput defaultValue={serviceCred?.id} />
+              <TextInput value={serviceCred?.id} onClick={() => {}} readOnly />
             </InputWrapper>
             <InputWrapper
               label="API Secret"
@@ -33,6 +33,8 @@ export default function ServiceCred() {
               error="Please copy API Secret, this would not be visible later."
             >
               <TextInput
+                readOnly
+                onClick={() => {}}
                 value={!isVis ? "*************" : serviceCred?.secret}
                 rightSection={
                   <IconWrapper
