@@ -12,6 +12,9 @@ export default function ServiceCred() {
     <Observer>
       {() => {
         const { serviceCred } = serviceStore;
+        if (serviceCred == null) {
+          return <></>;
+        }
         return (
           <Modal
             opened={serviceCred != null}
@@ -25,7 +28,7 @@ export default function ServiceCred() {
               server.
             </p>
             <InputWrapper label="API ID" style={{ marginTop: "10px" }}>
-              <TextInput value={serviceCred?.id} onClick={() => {}} readOnly />
+              <TextInput value={serviceCred.id} readOnly />
             </InputWrapper>
             <InputWrapper
               label="API Secret"
@@ -34,8 +37,7 @@ export default function ServiceCred() {
             >
               <TextInput
                 readOnly
-                onClick={() => {}}
-                value={!isVis ? "*************" : serviceCred?.secret}
+                value={!isVis ? "*************" : serviceCred.secret}
                 rightSection={
                   <IconWrapper
                     style={{ cursor: "pointer" }}
