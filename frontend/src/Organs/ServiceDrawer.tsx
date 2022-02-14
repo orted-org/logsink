@@ -5,61 +5,63 @@ import {
   InputWrapper,
   Button,
 } from "@mantine/core";
-import { Observer } from "mobx-react-lite";
+import { useState } from "react";
+import MService from "../Logic/Model/MService";
 import { useStores } from "../Logic/Providers/StoresProviders";
 
-function ServiceDrawer() {
+interface ServiceDrawerProps {
+  item: MService;
+}
+function ServiceDrawer(props: ServiceDrawerProps) {
   const { serviceStore } = useStores();
+  const [draftItem, setDraftItem] = useState(props.item);
+  if (!draftItem) {
+    return <></>;
+  }
   return (
-    <Observer>
-      {() => {
-        const { draftItem } = serviceStore;
-        if (!draftItem) {
-          return <></>;
-        }
-        return (
-          <Drawer
-            opened={serviceStore.draftItem !== null}
-            onClose={() => {
-              serviceStore.draftItem = null;
-            }}
-            title={draftItem.id !== "" ? "Edit Service" : "New Service"}
-            padding="xl"
-            size="xl"
-          >
-            <InputWrapper required label="Name">
-              <TextInput
-                value={draftItem.name}
-                onChange={(e) => {
-                  draftItem.name = e.target.value;
-                }}
-                placeholder="Service name"
-              />
-            </InputWrapper>
-            <InputWrapper label="Description">
-              <Textarea
-                value={draftItem.description}
-                onChange={(e) => {
-                  draftItem.description = e.target.value;
-                }}
-                placeholder="Service description"
-              />
-            </InputWrapper>
-            <Button
-              style={{ marginTop: "30px" }}
-              onClick={() => {
-                draftItem.id !== ""
-                  ? serviceStore.updateService(draftItem)
-                  : serviceStore.createService(draftItem);
-                serviceStore.draftItem = null;
-              }}
-            >
-              {draftItem.id !== "" ? "Save" : "Create"}
-            </Button>
-          </Drawer>
-        );
+    <Drawer
+      opened={true}
+      onClose={() => {
+        serviceStore.setDraftItem(null);
       }}
-    </Observer>
+      title={draftItem.id !== "" ? "Edit Service" : "New Service"}
+      padding="xl"
+      size="xl"
+    >
+      <InputWrapper required label="Name">
+        <TextInput
+          value={draftItem.name}
+          onChange={(e) => {
+            setDraftItem((ps) => {
+              return { ...ps, name: e.target.value };
+            });
+          }}
+          placeholder="Service name"
+        />
+      </InputWrapper>
+      <InputWrapper label="Description">
+        <Textarea
+          value={draftItem.description}
+          onChange={(e) => {
+            setDraftItem((ps) => {
+              return { ...ps, description: e.target.value };
+            });
+          }}
+          placeholder="Service description"
+        />
+      </InputWrapper>
+      <Button
+        style={{ marginTop: "30px" }}
+        onClick={() => {
+          draftItem.id !== ""
+            ? serviceStore.updateService(draftItem)
+            : serviceStore.createService(draftItem);
+          serviceStore.setDraftItem(null);
+        }}
+      >
+        {draftItem.id !== "" ? "Save" : "Create"}
+      </Button>
+    </Drawer>
   );
 }
 
