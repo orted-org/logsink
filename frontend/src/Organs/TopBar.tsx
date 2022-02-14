@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { IconPlus } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
 import { useStores } from "../Logic/Providers/StoresProviders";
-import ServiceCred from "./ServiceCred";
-import ServiceDrawer from "./ServiceDrawer";
+import ServiceCred from "./ServiceCredModal";
+import ServiceDrawer from "./ServiceCEDrawer";
 const STopBar = styled.div`
   height: fit-content;
   min-height: 60px;

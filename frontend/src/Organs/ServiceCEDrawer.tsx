@@ -9,10 +9,10 @@ import { useState } from "react";
 import MService from "../Logic/Model/MService";
 import { useStores } from "../Logic/Providers/StoresProviders";
 
-interface ServiceDrawerProps {
+interface ServiceCEDrawerProps {
   item: MService;
 }
-function ServiceDrawer(props: ServiceDrawerProps) {
+function ServiceCEDrawer(props: ServiceCEDrawerProps) {
   const { serviceStore } = useStores();
   const [draftItem, setDraftItem] = useState(props.item);
   if (!draftItem) {
@@ -65,4 +65,4 @@ function ServiceDrawer(props: ServiceDrawerProps) {
   );
 }
 
-export default ServiceDrawer;
+export default ServiceCEDrawer;

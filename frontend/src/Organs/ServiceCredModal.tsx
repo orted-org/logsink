@@ -5,7 +5,7 @@ import { IconEye, IconEyeOff } from "../Components/Icons";
 import IconWrapper from "../Components/IconWrapper";
 import { useStores } from "../Logic/Providers/StoresProviders";
 
-export default function ServiceCred() {
+export default function ServiceCredModal() {
   const { serviceStore } = useStores();
   const [isVis, setIsVis] = useState(false);
   return (
