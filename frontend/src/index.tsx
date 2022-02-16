@@ -10,13 +10,13 @@ import { RService } from "./Logic/Repository/RService";
 import { SAuth } from "./Logic/Stores/SAuth";
 import { RAuth } from "./Logic/Repository/RAuth";
 import { MantineProvider } from "@mantine/core";
-
+const API_BASE_URL = "/api";
 ReactDOM.render(
   <React.StrictMode>
     <StoresContext.Provider
       value={{
-        serviceStore: new SService(new RService("http://localhost:4000")),
-        authStore: new SAuth(new RAuth("http://localhost:4000")),
+        serviceStore: new SService(new RService(API_BASE_URL)),
+        authStore: new SAuth(new RAuth(API_BASE_URL)),
       }}
     >
       <SimaraThemeContext.Provider
