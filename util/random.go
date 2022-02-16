@@ -59,7 +59,7 @@ func RandomLevel() string {
 	return levels[rand.Intn(len(levels))]
 }
 
-func RandomLogs() (string, map[string]interface{}) {
+func RandomLog() (string, map[string]interface{}) {
 	httpLog := make(map[string]interface{})
 	httpLog["method"] = RandomMethod()
 	httpLog["path"] = "/" + RandomString(5)
