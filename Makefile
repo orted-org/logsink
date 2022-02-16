@@ -4,4 +4,8 @@ dev:
 	go run cmd/http-server/*.go
 seed:
 	go run cmd/seeder/*.go
-.PHONY: test dev seed
+build_fs:
+	go build -o app/api cmd/http-server/*.go && cd frontend && yarn build && cp -r build ../app/
+run: 
+	cd app && ./api
+.PHONY: test dev seed build_fs run
