@@ -2,11 +2,7 @@ import { ActionIcon, Badge } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { FullScreen } from "../../../Components/Global/Styles";
-import {
-  IconPencil,
-  IconStatusOnline,
-  IconTrash,
-} from "../../../Components/Icons";
+import { IconPencil, IconTrash } from "../../../Components/Icons";
 import IconWrapper from "../../../Components/IconWrapper";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import ServiceListItem from "./ListItem";
@@ -54,14 +50,6 @@ function ServiceListIndex() {
                           }}
                         >
                           <IconWrapper>{IconPencil}</IconWrapper>
-                        </ActionIcon>,
-                        <ActionIcon
-                          style={{ display: "inline", marginRight: "5px" }}
-                          key={item.id + "live"}
-                          variant="light"
-                          onClick={() => {}}
-                        >
-                          <IconWrapper>{IconStatusOnline}</IconWrapper>
                         </ActionIcon>,
                         <ActionIcon
                           style={{ display: "inline" }}
