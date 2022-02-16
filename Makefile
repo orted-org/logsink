@@ -2,4 +2,6 @@ test:
 	go test -v -cover ./...
 dev:
 	go run cmd/http-server/*.go
-.PHONY: test 
+seed:
+	go run cmd/seeder/*.go
+.PHONY: test dev seed
