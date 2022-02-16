@@ -12,7 +12,6 @@ import (
 	"github.com/joho/godotenv"
 	db "github.com/orted-org/logsink/db/dao"
 	authservice "github.com/orted-org/logsink/internal/auth_service"
-	logbroadcaster "github.com/orted-org/logsink/internal/log_broadcaster"
 	logmanager "github.com/orted-org/logsink/internal/log_manager"
 	kvstore "github.com/orted-org/logsink/pkg/kv_store"
 	"github.com/rs/cors"
@@ -144,12 +143,6 @@ func initLogManager(app *App) {
 		}
 	})
 
-}
-func initLogBroadcaster(app *App) {
-	app.logBroadcaster = logbroadcaster.New()
-	app.logBroadcaster.Listen(func(log interface{}) {
-		
-	})
 }
 
 func initAuxillary() {

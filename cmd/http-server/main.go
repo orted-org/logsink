@@ -7,7 +7,6 @@ import (
 
 	db "github.com/orted-org/logsink/db/dao"
 	authservice "github.com/orted-org/logsink/internal/auth_service"
-	logbroadcaster "github.com/orted-org/logsink/internal/log_broadcaster"
 	logmanager "github.com/orted-org/logsink/internal/log_manager"
 )
 
@@ -36,9 +35,6 @@ type App struct {
 
 	// log manager
 	logManager *logmanager.LogManager
-
-	// log broadcaster
-	logBroadcaster *logbroadcaster.LogBroadcaster
 }
 
 var (
@@ -76,7 +72,6 @@ func main() {
 
 	initLogManager(app)
 
-	go initLogBroadcaster(app)
 	// server
 	initServer(app)
 	app.logger.Fatal(app.srv.ListenAndServe())
